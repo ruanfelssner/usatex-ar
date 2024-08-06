@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usatex AR</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+    <style>
+        /* Estilos para imagens */
+        img {
+            max-width: 200px;
+            height: auto;
+        }
+        /* Estilos para tabelas */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div id="markdown-content">
+        <!-- O conteúdo Markdown será carregado aqui -->
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Criar um conversor Showdown
+            var converter = new showdown.Converter();
+
+            // Carregar o arquivo markdown
+            fetch('./content.md')
+                .then(response => response.text())
+                .then(markdownText => {
+                    // Converter markdown para HTML
+                    var html = converter.makeHtml(markdownText);
+
+                    // Definir o conteúdo HTML do div
+                    document.getElementById('markdown-content').innerHTML = html;
+                })
+                .catch(error => console.error('Erro ao carregar markdown:', error));
+        });
+    </script>
+</body>
+</html>
